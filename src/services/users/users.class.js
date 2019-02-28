@@ -3,11 +3,6 @@ const errors = require("@feathersjs/errors");
 const uuid = require('uuid/v4');
 
 class UsersService extends knexService {
-  constructor (options) {
-    super(options);
-    this.options = options;
-  }
-
   setup (app){ 
     this.app = app;
   }
@@ -24,11 +19,15 @@ class UsersService extends knexService {
       api_key: uuid()
     }
     try {
-      console.log(user);
-      await super.create(user, { query: { id: user.id } });
+      const newUser = await super.create(user);
+      if (newUser) {
+        return {
+          api_key: newUser.api_key,
+          identifier: newUser.identifier
+        }
+      }
     } catch(err) {
       console.log(err);
-      // return Promise.reject(new errors.GeneralError('Unable to create the user'));
     }
   }
 }
