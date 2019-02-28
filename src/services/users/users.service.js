@@ -1,16 +1,14 @@
 // Initializes the `users` service on path `/users`
-const createService = require('feathers-knex');
+const createService = require('./users.class');
 const createModel = require('../../models/users.model');
 const hooks = require('./users.hooks');
 
 module.exports = function (app) {
   const Model = createModel(app);
-  const paginate = app.get('paginate');
 
   const options = {
     name: 'users',
-    Model,
-    paginate
+    Model
   };
 
   // Initialize our service with any options it requires
