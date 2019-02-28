@@ -6,6 +6,7 @@ class IdentifierService extends knexService {
   setup (app){ 
     this.app = app;
   }
+
   async find (params) {
     let data = {};
     try {
