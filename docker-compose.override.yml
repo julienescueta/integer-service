@@ -1,0 +1,13 @@
+version: '3.6'
+
+services:
+  database:
+    environment:
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+
+volumes:
+  db-data:
