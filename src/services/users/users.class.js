@@ -26,12 +26,15 @@ class UsersService extends knexService {
           api_key: newUser.api_key,
           identifier: newUser.identifier
         }
+      } else {
+        return Promise.reject(new errors.GeneralError('Something wrong happened while creating your account'));
       }
     } catch(err) {
       if (err && err.message && err.message.includes('users_email_unique')) {
         return Promise.reject(new errors.BadRequest('User already exists'));
       }
       console.log(err);
+      return Promise.reject(new errors.GeneralError('Sorry, could not process your request'));
     }
   }
 }

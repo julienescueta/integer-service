@@ -25,6 +25,7 @@ class Service {
         }
       } catch (err) {
         console.log(err);
+        return Promise.reject(new errors.GeneralError('Sorry, could not process your request'));
       }
     }
   }

@@ -12,20 +12,23 @@ class IdentifierService extends knexService {
       return Promise.reject(new errors.BadRequest('api_key is required'));
     }
 
-    let data = {};
+    let user;
     try {
       const query = {
         query: {
           api_key: params.query.api_key
         }
       };
-      const user = await super.find(query);
-      if (user) {
-        data = parseInt(user[0].identifier, 10) || 0;
-        return { identifier: data };
-      }
+      user = await super.find(query);
     } catch (err) {
       console.log(err);
+      return Promise.reject(new errors.GeneralError('Sorry, could not process your request'));
+    }
+    if (user && user[0] && user[0].identifier) {
+      const data = parseInt(user[0].identifier, 10) || 0;
+      return { identifier: data };
+    } else {
+      return Promise.reject(new errors.BadRequest('We could not locate your api key'));
     }
   }
 
@@ -37,14 +40,23 @@ class IdentifierService extends knexService {
     if (!data || !data.identifier) {
       return Promise.reject(new errors.BadRequest('identifier is required'));
     }
+
     try {
       const query = {
         query: {
           api_key: params.query.api_key
         }
       }
-      const user = await super.find(query);
-      if (user) {
+
+      let user;
+      try {
+        user = await super.find(query);
+      } catch (err) {
+        console.log(err);
+        return Promise.reject(new errors.GeneralError('Sorry, could not process your request'));
+      }
+
+      if (user && user[0] && user.id) {
         try {
           const updatedUser = await super.patch(user[0].id, { identifier: data.identifier });
           if (user) {
@@ -53,7 +65,10 @@ class IdentifierService extends knexService {
           }
         } catch (err) {
           console.log(err);
+          return Promise.reject(new errors.GeneralError('Sorry, could not process your request'));
         }
+      } else {
+        return Promise.reject(new errors.BadRequest('We could not locate your api key'));
       }
 
     } catch (err) {
