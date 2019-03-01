@@ -56,7 +56,7 @@ class IdentifierService extends knexService {
         return Promise.reject(new errors.GeneralError('Sorry, could not process your request'));
       }
 
-      if (user && user[0] && user.id) {
+      if (user && user[0] && user[0].id) {
         try {
           const updatedUser = await super.patch(user[0].id, { identifier: data.identifier });
           if (user) {

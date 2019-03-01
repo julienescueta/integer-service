@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   api:
-    image: identifier-service
+    image: julienescueta/identifier-service
     ports:
       - 80:3030
     networks:
