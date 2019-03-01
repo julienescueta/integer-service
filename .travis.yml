@@ -1,0 +1,14 @@
+dist: trusty
+
+services: docker
+
+script:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - make clean
+  - make build
+  - make push
+
+env:
+  matrix:
+    secure: C9Ml9e87Q7E2jB7UvwZTEyjXyIWf5EGAJrOyrLx/FYQWYJnsfp1w9Fv1jRVN5G8eq3+9+4E4Edoe+YYDTDKjH8VrWp8Bus8puvzn97/m+dwmPYqNMxgt7GVox0l3SMse5ngNMiZj4nl1qmFBY+RGqGy+mU42Wiw+ua4JrfFnkMvlVVtS+Xr6mT9wyfl49fiuYYAldOmPI/na+28FA+hHLAGtRtVtdb3c+ml2aGCTJ+yaoTUNCkcCEjw5Ezvqta3e7kfj0v1VOa2QmdaI4VztA1Xt8i4OmM1wGf2h/kn/Mxv8HxsDWbXxLL6EKwdvU56B/roxsMhw3NlI6XWmVGgIx1L27hUxcProDDkqkpR7zVo6iz1Ed3AtMAgJAI5NGRIrm+yUtcqemL2M1h2oZc0RvR1WQF7fnBQ3388EIYp9tqbKL9SiFblIHVPY/B2V21vzvlPCth9C2XO1rzqoCDBpseVFcWDLPzHDIJjmnwrTPeVIFzNR8HlRvmNcGGD9G8H75RlcmYPqESkUMsl+Wk8y1dH9nsXh5U7gJkMNXYS4IceN7keAS4HAHt1Ht/ofOr5JWVmS4h/yGAlqDKJXR63AZk8LpUFMt83tcO1do8o5lKV3rurA9XyukgHMOiI8qf2JDsMoLGzIsAPsP6B5u4K2mRKXZJRzr/2sJTnOu4Spal4=
+
