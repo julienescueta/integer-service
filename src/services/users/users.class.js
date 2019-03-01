@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 const knexService = require('feathers-knex').Service;
-const errors = require("@feathersjs/errors");
+const errors = require('@feathersjs/errors');
 const uuid = require('uuid/v4');
 
 class UsersService extends knexService {
@@ -18,14 +18,14 @@ class UsersService extends knexService {
       email: data.email,
       password: data.password,
       api_key: uuid()
-    }
+    };
     try {
       const newUser = await super.create(user);
       if (newUser) {
         return {
           api_key: newUser.api_key,
           identifier: newUser.identifier
-        }
+        };
       } else {
         return Promise.reject(new errors.GeneralError('Something wrong happened while creating your account'));
       }
@@ -33,7 +33,7 @@ class UsersService extends knexService {
       if (err && err.message && err.message.includes('users_email_unique')) {
         return Promise.reject(new errors.BadRequest('User already exists'));
       }
-      console.log(err);
+      // console.log(err);
       return Promise.reject(new errors.GeneralError('Sorry, could not process your request'));
     }
   }
@@ -41,6 +41,6 @@ class UsersService extends knexService {
 
 module.exports = function createUsersService (options) {
   return new UsersService(options);
-}
+};
 
 module.exports.UsersService = UsersService;

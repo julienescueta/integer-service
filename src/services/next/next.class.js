@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-const errors = require("@feathersjs/errors");
+const errors = require('@feathersjs/errors');
 
 class Service {
   setup (app){ 
@@ -24,7 +24,7 @@ class Service {
           };
         }
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         return Promise.reject(new errors.GeneralError('Sorry, could not process your request'));
       }
     }

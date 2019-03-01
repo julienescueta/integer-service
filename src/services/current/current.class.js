@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 const knexService = require('feathers-knex').Service;
-const errors = require("@feathersjs/errors");
+const errors = require('@feathersjs/errors');
 
 class IdentifierService extends knexService {
   setup (app){ 
@@ -21,7 +21,7 @@ class IdentifierService extends knexService {
       };
       user = await super.find(query);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       return Promise.reject(new errors.GeneralError('Sorry, could not process your request'));
     }
     if (user && user[0] && user[0].identifier) {
@@ -46,13 +46,13 @@ class IdentifierService extends knexService {
         query: {
           api_key: params.query.api_key
         }
-      }
+      };
 
       let user;
       try {
         user = await super.find(query);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         return Promise.reject(new errors.GeneralError('Sorry, could not process your request'));
       }
 
@@ -64,7 +64,7 @@ class IdentifierService extends knexService {
             return { identifier: data };
           }
         } catch (err) {
-          console.log(err);
+          // console.log(err);
           return Promise.reject(new errors.GeneralError('Sorry, could not process your request'));
         }
       } else {
@@ -72,7 +72,7 @@ class IdentifierService extends knexService {
       }
 
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   }
 }
