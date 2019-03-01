@@ -43,6 +43,7 @@ $ feathers help                           # Show all commands
 
 - Add a script to initialize `api` and `test` databases
 - Email, password, api_key and identifier is limited to 255 characters
+- Would like to clean-up data access layer so a single class provides all of the data store and retrieval. 
 
 ## Help
 

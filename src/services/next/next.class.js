@@ -11,13 +11,13 @@ class Service {
       return Promise.reject(new errors.BadRequest('api_key is required'));
     }
 
-    const data = await this.app.service('id').find(params);
+    const data = await this.app.service('current').find(params);
     if (data) {
       const oldId = parseInt(data.identifier, 10);
       const newId = oldId + 1;
 
       try {
-        const updated = await this.app.service('id').update(null, { identifier: newId.toString() }, params);
+        const updated = await this.app.service('current').update(null, { identifier: newId.toString() }, params);
         if (updated) {
           return {
             identifier: updated.identifier
