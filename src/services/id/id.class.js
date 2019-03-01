@@ -1,6 +1,6 @@
+/* eslint-disable no-unused-vars */
 const knexService = require('feathers-knex').Service;
 const errors = require("@feathersjs/errors");
-const uuid = require('uuid/v4');
 
 class IdentifierService extends knexService {
   setup (app){ 
@@ -8,6 +8,10 @@ class IdentifierService extends knexService {
   }
 
   async find (params) {
+    if (!params || !params.query || !params.query.api_key) {
+      return Promise.reject(new errors.BadRequest('api_key is required'));
+    }
+
     let data = {};
     try {
       const query = {
@@ -26,6 +30,13 @@ class IdentifierService extends knexService {
   }
 
   async update (id, data, params) {
+    if (!params || !params.query || !params.query.api_key) {
+      return Promise.reject(new errors.BadRequest('api_key is required'));
+    }
+
+    if (!data || !data.identifier) {
+      return Promise.reject(new errors.BadRequest('identifier is required'));
+    }
     try {
       const query = {
         query: {

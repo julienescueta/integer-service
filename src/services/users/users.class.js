@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const knexService = require('feathers-knex').Service;
 const errors = require("@feathersjs/errors");
 const uuid = require('uuid/v4');
@@ -27,6 +28,9 @@ class UsersService extends knexService {
         }
       }
     } catch(err) {
+      if (err && err.message && err.message.includes('users_email_unique')) {
+        return Promise.reject(new errors.BadRequest('E-mail already exists'));
+      }
       console.log(err);
     }
   }
