@@ -1,5 +1,19 @@
 version: '3.6'
 
 services:
+  api:
+    image: identifier-service
+    ports:
+      - 80:3030
+    networks:
+      - identifier
+    depends_on:
+      - database
+
   database:
     image: postgres:9.6-alpine
+    networks:
+      - identifier
+
+networks:
+  identifier:

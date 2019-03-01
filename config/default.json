@@ -9,11 +9,11 @@
   "postgres": {
     "client": "pg",
     "connection": {
-      "host": "localhost",
+      "host": "database",
       "user": "postgres",
       "password": "password",
       "database": "api",
-      "port": 5433
+      "port": 5432
     }
   }
 }
