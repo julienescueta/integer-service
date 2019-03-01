@@ -29,7 +29,7 @@ class UsersService extends knexService {
       }
     } catch(err) {
       if (err && err.message && err.message.includes('users_email_unique')) {
-        return Promise.reject(new errors.BadRequest('E-mail already exists'));
+        return Promise.reject(new errors.BadRequest('User already exists'));
       }
       console.log(err);
     }
